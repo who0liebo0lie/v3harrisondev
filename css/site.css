@@ -416,8 +416,8 @@ button.hotspot{background:none;border:0;padding:0;cursor:pointer}
 .tv-wrap{max-width:1240px;margin:0 auto;padding:22px 14px 46px;background:
  linear-gradient(180deg,#0b2f47,#0a2a40)}
 .tv-row{display:grid;gap:18px;margin-bottom:18px}
-.tv-row-steps{grid-template-columns:30% 1fr}
-.tv-row-steps .tv-step3{grid-column:1/-1}
+.tv-row-steps{grid-template-columns:1fr 1.35fr}
+.tv-row-single{grid-template-columns:1fr}
 .tv-row-info{grid-template-columns:1fr 1.15fr 1fr}
 .tv-card{background:#fdf8ee;border-radius:16px;padding:22px 22px 24px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
 .tv-step-label{font:700 12px/1 Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#b98a2c;text-align:center;margin:0 0 8px}
@@ -689,7 +689,8 @@ button.hotspot{background:none;border:0;padding:0;cursor:pointer}
    RSVP accept modal. All rules below are width-agnostic or scoped.
    ============================================================ */
 .tv-btn-outline{margin-top:10px}
-.tv-step3 .tv-intro{max-width:720px;margin-left:auto;margin-right:auto}
+.tv-step2 .tv-intro{text-align:left;max-width:none;line-height:1.6}
+.tv-cheaper{margin-top:12px;color:#5a3d16}
 .rsvp-modal-card p+p{margin-top:10px}
 .rsvp-modal-card .tv-btn{margin:18px auto 0;max-width:320px}
 .tv-leave-modal .tv-leave-continue{color:#7a5a20;border-color:#cda13e;background:transparent;cursor:pointer;margin-top:10px}
@@ -698,4 +699,25 @@ button.hotspot{background:none;border:0;padding:0;cursor:pointer}
 @media(max-width:600px){
   .tv-leave-modal .rsvp-modal-card{padding:32px 18px 22px}
   .rsvp-modal-card p{font-size:15px}
+}
+
+
+/* ============================================================
+   v52 — RSVP modals: attestation gate, recorded confirmations.
+   Width-agnostic; phone tweaks are scoped below.
+   ============================================================ */
+.rsvp-modal .rsvp-modal-card{max-height:92vh;overflow:auto;-webkit-overflow-scrolling:touch}
+.rsvp-modal-wide{width:min(680px,94vw)}
+.rm-title{margin:8px 0 12px;font:700 clamp(20px,2.6vw,26px)/1.2 "Playfair Display",Georgia,serif;color:#b1114b}
+.rm-body{font:500 clamp(15px,1.8vw,17px)/1.6 Georgia,serif;color:#4a3b2a;margin:0 0 12px;text-align:left}
+.rm-links{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:6px 0 14px}
+.rm-links .tv-btn{margin:0;flex:1 1 220px;max-width:300px}
+.rm-check{display:flex;gap:10px;align-items:flex-start;text-align:left;font:500 14px/1.5 Arial,sans-serif;color:#3d362d;background:#fff8ec;border:1px solid #ead9bd;border-radius:12px;padding:12px 14px;margin:0 0 14px;cursor:pointer}
+.rm-check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:#d81b60}
+.rm-confirm{margin:6px auto 0;max-width:280px;cursor:pointer}
+.rm-confirm[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+@media(max-width:600px){
+  .rsvp-modal{padding:12px}
+  .rsvp-modal-card{padding:34px 16px 20px}
+  .rm-body{font-size:14.5px}
 }
