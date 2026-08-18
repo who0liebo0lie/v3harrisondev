@@ -1,0 +1,244 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RSVP | Julia & Wesley</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/site.css?v=51"></head>
+<body class="rsvp2-body">
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="sn-logo" href="index.html?skip=1"><span class="word">HARRISONS</span><span class="script">Set Sail</span><span class="anch">⚓</span></a>
+  <div class="sn-links"><a href="index.html?skip=1">Home</a><a href="our-story.html">Our Story</a><a href="adventure.html">The Adventure</a><a href="explore.html">Explore</a><a href="travel.html">Travel</a><a href="faq.html">FAQ</a><a href="rsvp.html" aria-current="page">RSVP</a></div>
+  <a class="sn-badge" href="index.html?skip=1" aria-label="Home">⚓</a>
+</nav>
+<main class="rsvp2-shell corner-florals">
+  <img class="fl-tl" src="assets/florals/tl.png" alt="">
+  <img class="fl-tr" src="assets/florals/tr.png" alt="">
+  <img class="fl-bl" src="assets/florals/bl.png" alt="">
+  <img class="fl-br" src="assets/florals/br.png" alt="">
+
+  <header class="rsvp2-head">
+    <div class="rsvp-anchor" aria-hidden="true">⚓</div>
+    <h1>Will you set sail with us?</h1>
+    <div class="rsvp2-divider"><span>✿</span></div>
+    <h2 class="rsvp2-join">Can you join the adventure?</h2>
+    <p class="rsvp2-deadline">We hope so! Since joining us requires a bit of advance planning, we'd love to know your intentions within one week of receiving your invitation, if you're able. If you already know you can't make it, letting us know early gives us the chance to invite another person we love. Plus giving them as much time as possible to plan.</p>
+    <p class="rsvp2-deadline"><strong>Final RSVP deadline: September 7th.</strong></p>
+    <p class="rsvp2-script">We can't wait to celebrate with you!</p>
+  </header>
+
+  <form id="rsvp-form">
+    <div class="rsvp2-bar">
+      <label for="guest-count">How many guests are you responding for?</label>
+      <select id="guest-count">
+        <option>1</option><option selected>2</option><option>3</option><option>4</option>
+        <option>5</option><option>6</option><option>7</option><option>8</option>
+      </select>
+    </div>
+
+    <div id="guests"></div>
+
+    <p class="rsvp2-pb-note">🏓 Playing pickleball? Register your team separately on the <a href="pickleball.html">Pickleball page</a>!</p>
+
+    <div class="rsvp2-note">
+      <label for="rsvp-message">Anything else you'd like us to know? (Optional)</label>
+      <textarea id="rsvp-message" rows="3" placeholder="We are beyond excited to celebrate with you in paradise!"></textarea>
+    </div>
+
+  <section class="gift-frame" aria-label="Gifts">
+    <div class="gift-fl" aria-hidden="true">✿</div>
+    <h2>Your presence is the present</h2>
+    <p>Celebrating with you is more than enough, and no gift is expected.</p>
+    <p>For anyone who would still like to contribute, gifts may be sent by Zelle to</p>
+    <p class="zelle-line"><span class="zelle">gifts@harrisonssetsail.com</span></p>
+    <p>Please include your name in the memo</p>
+    <p>because we are against random acts of untraceable generosity.</p>
+    <p class="gift-note">With limited cabin and luggage space, transporting physical gifts home would be quite the adventure. Please don't bring gifts aboard since we're just thrilled to celebrate with you.</p>
+  </section>
+
+    <div class="rsvp2-submit"><button type="submit"><span aria-hidden="true">⚓</span> Submit my RSVP</button></div>
+    <p class="rsvp2-fineprint">Personalized invitation links are used to confirm invitation delivery, manage attendance, and connect RSVP responses with the correct guest or household.</p>
+    <p class="rsvp2-status" id="rsvp-status" role="status" aria-live="polite"></p>
+  </form>
+
+
+  <div class="rsvp2-footer-anchor" aria-hidden="true">✿ ⚓ ✿</div>
+  <div class="rsvp-modal" id="decline-modal" hidden>
+    <div class="rsvp-modal-card">
+      <button class="rsvp-modal-close" id="decline-close" aria-label="Close">×</button>
+      <div class="rm-heart">💛</div>
+      <p>We'll miss celebrating with you, but we're so grateful to have you in our lives. A wedding is only one adventure, and we're looking forward to many more years of memories, laughter, and adventures together as friends.</p>
+    </div>
+  </div>
+  <div class="rsvp-modal" id="accept-modal" hidden>
+    <div class="rsvp-modal-card">
+      <button class="rsvp-modal-close" id="accept-close" aria-label="Close">×</button>
+      <div class="rm-heart">⚓</div>
+      <p><strong>Your RSVP has been recorded!</strong></p>
+      <p>You're on the guest list — we can't wait to celebrate with you.</p>
+    </div>
+  </div>
+</main>
+<script>
+/* ============================================================
+   ONE PLACE TO CONFIGURE WHERE RESPONSES GO
+   ============================================================
+   Option A (recommended, free, unlimited): Google Sheet
+     Follow SETUP-RESPONSES.md, then paste your Apps Script
+     Web-app URL below (it ends in /exec).
+   Option B: leave ENDPOINT empty and set EMAIL — submitting
+     opens the guest's email app with answers pre-filled.     */
+window.WEDDING_FORMS = {
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbxVf1ZDeSEh_ztoROJPpk6vu4GM1yVqFbLHAfWf9PSdr5CPomlBOaf2r0D9dfgJoxn3/exec",
+  EMAIL: "harrisonssetsail@gmail.com"
+};
+
+/* Which invitation link was used (?g=smith-family) — remembered
+   so RSVPs can be matched to the right household. */
+(function () {
+  try {
+    var g = new URLSearchParams(location.search).get('g');
+    if (g) localStorage.setItem('weddingInviteCode', g);
+  } catch (_) {}
+})();
+function inviteCode() {
+  try { return localStorage.getItem('weddingInviteCode') || ''; } catch (_) { return ''; }
+}
+
+/* Fire-and-forget event (invitation opens). Never throws. */
+function trackWeddingEvent(data) {
+  var cfg = window.WEDDING_FORMS;
+  if (!cfg.ENDPOINT) return;
+  data['Invite code'] = data['Invite code'] || inviteCode();
+  data['Page'] = location.pathname.split('/').pop() || 'index.html';
+  try {
+    fetch(cfg.ENDPOINT, { method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+  } catch (_) {}
+}
+
+/* Form submissions (RSVP, pickleball). */
+async function sendWeddingForm(subject, data, type) {
+  var cfg = window.WEDDING_FORMS;
+  data = Object.assign({ type: type || 'other', 'Invite code': inviteCode() }, data);
+  if (cfg.ENDPOINT) {
+    /* text/plain + no-cors avoids CORS preflight; Apps Script receives it fine. */
+    await fetch(cfg.ENDPOINT, { method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(data) });
+    return 'sent';
+  }
+  var lines = [];
+  (function flat(obj, p) {
+    for (var k in obj) {
+      var v = obj[k];
+      if (v && typeof v === 'object') flat(v, p + k + ' ');
+      else lines.push(p + k + ': ' + v);
+    }
+  })(data, '');
+  location.href = 'mailto:' + cfg.EMAIL + '?subject=' + encodeURIComponent(subject) +
+                  '&body=' + encodeURIComponent(lines.join('\n'));
+  return 'mailto';
+}
+
+</script>
+<script>
+(() => {
+  const EVENTS = [
+    ['welcomeParty', '🌺', 'Welcome Party'],
+    ['bingo',        'Ⓑ', 'Bingo'],
+    ['wedding',      '💍', 'Wedding']
+  ];
+  const guestsWrap = document.querySelector('#guests');
+  const countSel   = document.querySelector('#guest-count');
+  const form       = document.querySelector('#rsvp-form');
+  const status     = document.querySelector('#rsvp-status');
+
+  function guestBlock(i){
+    const el = document.createElement('section');
+    el.className = 'guest-card';
+    el.dataset.guest = i;
+    el.innerHTML = `
+      <span class="guest-tag">GUEST ${i}</span>
+      <div class="guest-names">
+        <label>First name<input name="g${i}-first" ${i===1?'required':''} autocomplete="given-name"></label>
+        <label>Last name<input name="g${i}-last" autocomplete="family-name"></label>
+      </div>
+      <p class="guest-events-title">PLEASE RSVP TO EACH EVENT</p>
+      <div class="event-grid">
+        ${EVENTS.map(([key, ico, name]) => `
+          <div class="event-cell" data-event="${key}">
+            <div class="ev-name"><span class="ev-ico">${ico}</span>${name}</div>
+            <button type="button" class="ev-btn yes">Yes, I'm in!</button>
+            <button type="button" class="ev-btn no">No, can't make it</button>
+          </div>`).join('')}
+      </div>
+      <div class="bingo-clue">
+        <h3>YOUR BINGO CLUE</h3>
+        <p>Share one surprising or fun fact about yourself. <em>Don’t have one yet? No problem — you can send it later. Please don’t delay your RSVP!</em></p>
+        <textarea name="g${i}-bingo" rows="3"></textarea>
+      </div>`;
+    el.querySelectorAll('.event-cell').forEach(cell => {
+      const yes = cell.querySelector('.yes'), no = cell.querySelector('.no');
+      yes.addEventListener('click', () => { yes.classList.add('on'); no.classList.remove('on'); });
+      no.addEventListener('click',  () => { no.classList.add('on');  yes.classList.remove('on'); });
+    });
+    return el;
+  }
+
+  function render(n){
+    const saved = new Map();
+    guestsWrap.querySelectorAll('.guest-card').forEach(c => saved.set(c.dataset.guest, c));
+    guestsWrap.innerHTML = '';
+    for (let i = 1; i <= n; i++) guestsWrap.appendChild(saved.get(String(i)) || guestBlock(i));
+  }
+  countSel.addEventListener('change', () => render(+countSel.value));
+  render(+countSel.value);
+
+  /* pre-fill guest 1 from the welcome gate */
+  const stored = (localStorage.getItem('weddingGuestName') || '').trim();
+  if (stored) {
+    const parts = stored.split(/\s+/);
+    const f = form.querySelector('[name="g1-first"]'), l = form.querySelector('[name="g1-last"]');
+    if (f && !f.value) f.value = parts.shift() || '';
+    if (l && !l.value) l.value = parts.join(' ');
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const data = {};
+    let anyName = false;
+    guestsWrap.querySelectorAll('.guest-card').forEach(card => {
+      const i = card.dataset.guest;
+      const first = card.querySelector(`[name="g${i}-first"]`).value.trim();
+      const last  = card.querySelector(`[name="g${i}-last"]`).value.trim();
+      if (first || last) anyName = true;
+      const g = { Name: `${first} ${last}`.trim() || '(no name given)' };
+      g['Bingo clue'] = card.querySelector(`[name="g${i}-bingo"]`).value.trim();
+      card.querySelectorAll('.event-cell').forEach(cell => {
+        const label = cell.querySelector('.ev-name').textContent.trim();
+        const yes = cell.querySelector('.yes').classList.contains('on');
+        const no  = cell.querySelector('.no').classList.contains('on');
+        g[label] = yes ? "Yes, I'm in!" : no ? "No, can't make it" : '(no answer)';
+      });
+      data[`Guest ${i}`] = g;
+    });
+    if (!anyName) { status.textContent = 'Please tell us at least one guest name.'; return; }
+    const note = form.querySelector('#rsvp-message').value.trim();
+    if (note) data['Message'] = note;
+    status.textContent = 'Sending your RSVP…';
+    try {
+      const how = await sendWeddingForm('Wedding RSVP', data, 'rsvp');
+      const anyYes = !!guestsWrap.querySelector('.ev-btn.yes.on');
+      if (how !== 'sent') {
+        status.textContent = 'Almost there — hit send in the email that just opened.';
+      } else if (anyYes) {
+        status.textContent = "You're on the guest list! We can't wait to celebrate with you. ⚓";
+        const am = document.getElementById('accept-modal');
+        if (am) { am.hidden = false; document.getElementById('accept-close').onclick = () => am.hidden = true; }
+      } else {
+        status.textContent = 'Your RSVP has been received.';
+        const dm = document.getElementById('decline-modal');
+        if (dm) { dm.hidden = false; document.getElementById('decline-close').onclick = () => dm.hidden = true; }
+      }
+    } catch (_) {
+      status.textContent = 'Hmm, that didn’t go through. Please try again.';
+    }
+  });
+})();
+
+</script>
+</body></html>

@@ -1,0 +1,7 @@
+1. Extract julia-wesley-wedding-v9.zip.
+2. Open the extracted folder and copy everything inside it.
+3. In GitHub Desktop: Repository > Show in Explorer.
+4. Paste into v2HarrisonWedding and choose Replace files.
+5. Commit summary: Use approved final page designs.
+6. Push origin.
+7. Wait 1-2 minutes and press Ctrl+Shift+R on the live site.

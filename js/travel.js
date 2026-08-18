@@ -1,0 +1,1 @@
+(()=>{const panel=document.querySelector('#faq-answer'),p=panel.querySelector('p');document.querySelectorAll('.faq-hotspots button, .faq-row-overlay').forEach(b=>b.addEventListener('click',()=>{p.textContent=b.dataset.answer;panel.hidden=false;}));panel.querySelector('button').addEventListener('click',()=>panel.hidden=true);})();

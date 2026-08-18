@@ -1,0 +1,701 @@
+/* Harrisons Set Sail — site.css v49
+   Pruned build: 363 unreachable rules + 6 orphaned keyframes removed.
+   Every selector in this file matches markup in the current HTML/JS.
+   Rule for future edits: any rule that should NOT apply at all screen
+   sizes must be wrapped in a media query BEFORE being appended. */
+:root{--navy:#082d43;--pink:#d81b60;--cream:#fff8ef;--gold:#c9932f;--ink:#2f2a24;--olive:#465129}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--navy);font-family:Arial,sans-serif;color:#fff}a{color:inherit}.page-shell{position:relative;width:min(100%,1024px);margin:0 auto;background:var(--cream);box-shadow:0 0 36px rgba(0,0,0,.28)}.approved-page{display:block;width:100%;height:auto}.hotspot{position:absolute;display:block;z-index:8;border-radius:8px;cursor:pointer;background:transparent;border:0}.hotspot:focus-visible,.action-chip:focus-visible,.details-button:focus-visible{outline:3px solid #fff;box-shadow:0 0 0 6px var(--pink)}.eyebrow{text-transform:uppercase;letter-spacing:.18em;color:var(--gold);font-weight:800}
+/* Welcome gate and intro */
+.welcome-gate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:24px;background:linear-gradient(rgba(8,45,67,.78),rgba(8,45,67,.86)),url('../assets/approved/garden.jpg') center/cover}.welcome-gate[hidden]{display:none}.welcome-error{color:#a61b42;min-height:1.4em}.skip,.sound{position:absolute;z-index:170;border:1px solid rgba(255,255,255,.75);background:rgba(8,45,67,.74);color:#fff;border-radius:999px;padding:10px 16px;cursor:pointer}.skip{right:20px;bottom:20px}
+
+/* Explore */
+.ship-interactive{position:absolute;left:11.7%;top:45.55%;width:79.1%;height:16.3%;z-index:5;overflow:hidden;border-radius:16px;touch-action:none;cursor:grab;perspective:900px}.ship-interactive:active{cursor:grabbing}.ship-interactive img{width:100%;height:100%;object-fit:cover;display:block;transform-origin:center;transition:transform .08s linear;user-select:none;pointer-events:none}.neighborhood.active{box-shadow:0 0 0 4px rgba(216,27,96,.45) inset}.neighborhood-panel{position:absolute;left:2.7%;top:62.3%;width:94.6%;height:34.5%;z-index:6;background:#fff8ef;color:var(--ink);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:30% 70%;grid-template-rows:52% 8% 40%;box-shadow:0 10px 30px rgba(0,0,0,.18)}.neighborhood-copy{padding:30px 28px}.neighborhood-copy h2{font:600 44px/1 Georgia,serif;color:var(--olive);margin:8px 0 18px}.neighborhood-copy p{font:16px/1.55 Georgia,serif}.neighborhood-panel>img{width:100%;height:100%;object-fit:cover}.venue-heading{grid-column:1/-1;text-align:center;padding:10px;font:600 20px/1 Georgia,serif;color:#9c6c1e;text-transform:uppercase;letter-spacing:.08em;border-top:1px solid #e2ccb1}.venue-cards{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:14px 20px 20px}.venue-cards article{background:#fff;border:1px solid #ead6bc;border-radius:14px;padding:15px;color:#3d342b}.venue-cards span{display:inline-block;background:var(--pink);color:#fff;border-radius:999px;padding:4px 8px;font-size:10px;text-transform:uppercase}.venue-cards h3{font:600 20px/1.2 Georgia,serif;margin:10px 0 6px}.venue-cards p{margin:0;font-size:13px;line-height:1.4}
+/* Travel FAQ */
+.faq-hotspots button{position:absolute;z-index:12;border:0;background:transparent;cursor:pointer}.faq-answer{position:absolute;z-index:30;left:18%;top:76%;width:64%;padding:24px 52px 24px 26px;border-radius:18px;background:#fff8ef;color:var(--ink);border:2px solid #d9b27e;box-shadow:0 16px 44px rgba(0,0,0,.28);font-size:16px;line-height:1.5}.faq-answer button{position:absolute;right:12px;top:10px;border:0;border-radius:50%;width:34px;height:34px;background:var(--pink);color:#fff;font-size:22px;cursor:pointer}
+/* RSVP actual form */.deadline{font-size:20px}.rsvp-form{display:grid;gap:20px}.rsvp-form label,.rsvp-form legend{font-weight:800}.rsvp-form input[type=text],.rsvp-form input:not([type]),.rsvp-form select,.rsvp-form textarea{width:100%;display:block;margin-top:8px;padding:13px;border:1px solid #d8c0a4;border-radius:12px;font:inherit}.rsvp-form fieldset{border:1px solid #dcc5aa;border-radius:15px;padding:18px;display:grid;gap:10px}.rsvp-form button{border:0;border-radius:999px;padding:15px;background:var(--pink);color:white;font-weight:800;font-size:17px;cursor:pointer}
+@media(max-width:700px){.skip{right:10px;bottom:10px}.neighborhood-panel{top:62%;height:36%;grid-template-columns:1fr;grid-template-rows:auto 30% auto auto}.neighborhood-copy{padding:16px}.neighborhood-copy h2{font-size:30px}.venue-cards{grid-template-columns:repeat(2,1fr);overflow:auto}.neighborhood-panel>img{grid-row:2}}@media(prefers-reduced-motion:reduce){.welcome-gate{display:none!important}}
+
+/* RSVP — navy and gold tropical direction */.rsvp-anchor{color:#b77813;font-size:38px;margin-bottom:5px}
+
+
+/* Version 13 corrective refinements */
+.explore-shell .neighborhood-panel{grid-template-columns:32% 68%;grid-template-rows:50% 9% 41%}
+.explore-shell .neighborhood-copy{padding:26px 24px;overflow:hidden}
+.explore-shell .neighborhood-copy h2{font-size:clamp(30px,4vw,44px);line-height:.98;overflow-wrap:anywhere;hyphens:auto;margin:8px 0 14px}
+.explore-shell .neighborhood-copy p{font-size:15px;line-height:1.42;margin:0}
+.explore-shell .neighborhood-panel>img{object-fit:cover;object-position:center center;min-width:0}
+.explore-shell .venue-heading{padding:9px 10px;font-size:19px}
+.explore-shell .venue-cards{padding:12px 18px 18px;gap:10px}
+.explore-shell .venue-cards article{padding:13px;overflow:hidden}
+.explore-shell .venue-cards h3{font-size:18px;overflow-wrap:anywhere}
+
+/* RSVP: use clean decorative corners only; prevent every overlap */
+.rsvp-anchor{font-size:30px;margin-bottom:2px}
+
+
+/* Version 14: final overlap, itinerary, explore and RSVP fixes */
+/* Landing image is now a single clean asset with one date/location treatment. */
+
+/* Saturday action rows: clear of Sail Away and in chronological order */
+
+/* Replace only the inconsistent Wednesday/Thursday typography panels. */
+
+/* Explore: fixed title wrapping and clean image fitting */
+.explore-shell .neighborhood-panel{grid-template-columns:33% 67%}
+.explore-shell .neighborhood-copy h2{overflow-wrap:normal;word-break:normal;hyphens:none;font-size:40px;line-height:1.02;letter-spacing:-.02em}
+.explore-shell .neighborhood-panel>img{object-fit:cover;object-position:center;filter:none;image-rendering:auto}
+.explore-shell .venue-cards{grid-template-columns:repeat(4,1fr)}
+.explore-shell .venue-cards article{min-height:132px}
+/* Three Entertainment Place cards after Casino removal */
+.explore-shell .venue-cards:has(article:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
+
+/* RSVP: one clean live form, no baked mockup fragments */
+@media(max-width:760px){.explore-shell .neighborhood-copy h2{font-size:30px}.explore-shell .venue-cards:has(article:nth-child(3):last-child){grid-template-columns:1fr 1fr}}
+
+/* Version 15 refinements */
+/* Landing date is baked cleanly into the image with no raised rectangle. */
+
+/* Adventure: use one uniform parchment treatment and compact type. */
+
+/* Explore: sharp supplied photos and controlled title wrapping. */
+.explore-shell .neighborhood-copy{padding:23px 22px}
+.explore-shell .neighborhood-copy h2{font-size:36px;line-height:.98;max-width:100%;overflow-wrap:normal;word-break:normal}
+.explore-shell .neighborhood-panel>img{object-fit:cover;object-position:center center;width:100%;height:100%}
+.explore-shell .venue-heading{font-size:18px}
+
+/* RSVP: restore lush tropical invitation personality without layered mockups. */
+
+
+/* Version 16 — clean final corrections */
+/* Adventure is now baked into one image; no patch panels can overlap. */
+
+/* RSVP: clean tropical invitation, no cropped mockup fragments. */
+.rsvp-anchor{font-size:30px!important;margin:0 0 4px!important}
+
+
+/* Version 17 — unified itinerary panels and tropical RSVP frame */
+
+
+/* Version 18 — clean RSVP floral frame and final itinerary corrections */
+
+
+/* Version 19 — RSVP Option 2 and repaired event links */
+
+.adventure-hotspot{position:absolute;z-index:8;display:block;border-radius:12px;cursor:pointer}
+.adventure-hotspot:focus-visible{outline:4px solid #e31b62;outline-offset:3px;background:rgba(255,255,255,.18)}
+/* Saturday right-panel rows in the baked itinerary image. */
+.adventure-bingo-link{left:70.5%;top:25.9%;width:20.5%;height:2.8%}
+.adventure-pickleball-link{left:70.5%;top:30.5%;width:22.5%;height:2.8%}
+
+
+/* Version 20 — repaired adventure links and clean RSVP footer */
+.adventure-bingo-link{
+  left:77.2%!important;
+  top:37.45%!important;
+  width:20.2%!important;
+  height:2.75%!important;
+  z-index:30!important;
+}
+.adventure-pickleball-link{
+  left:77.2%!important;
+  top:41.72%!important;
+  width:20.8%!important;
+  height:2.75%!important;
+  z-index:30!important;
+}
+.adventure-hotspot{pointer-events:auto!important}
+
+/* Remove all older emoji/pseudo-floral layers so only Option 2 artwork remains. */
+
+
+/* v21 landing navigation cleanup */
+.landing-shell{overflow:hidden}
+
+
+/* ============================================================
+   v22 REDESIGN — full-width pages, new welcome gate, real
+   Our Story + RSVP pages, pickleball form, travel hero
+   ============================================================ */
+
+/* ---- Global: no blue border, content fills the page ---- */
+body{background:var(--cream);color:var(--ink)}
+.page-shell{width:100%;max-width:1600px;box-shadow:none}
+.page-art{position:relative;width:100%;max-width:1600px;margin:0 auto}
+.page-art>img{display:block;width:100%;height:auto}
+
+/* ---- Landing nav: single white-font header, covers baked text ---- */
+
+/* ---- Real nav shared by rebuilt pages ---- */
+
+
+/* ---- Corner florals for rebuilt pages ---- */
+.corner-florals{pointer-events:none}
+/* v50 — scoped: the descendant version made EVERY img inside a corner-florals
+   page absolute (collapsed the FAQ hero to a gold line) */
+.corner-florals>.fl-tl,.corner-florals>.fl-tr,.corner-florals>.fl-bl,.corner-florals>.fl-br{position:absolute;z-index:1;pointer-events:none}
+.corner-florals .fl-tl{top:0;left:0;width:clamp(110px,17vw,220px)}
+.corner-florals .fl-tr{top:0;right:0;width:clamp(110px,17vw,220px)}
+.corner-florals .fl-bl{bottom:0;left:0;width:clamp(120px,18vw,235px)}
+.corner-florals .fl-br{bottom:0;right:0;width:clamp(120px,18vw,235px)}
+
+/* ---- Welcome gate v2 ---- */
+
+
+/* ---- Our Story page ---- */
+.story-page{position:relative;max-width:1600px;margin:0 auto;padding:clamp(20px,4vw,56px) 16px clamp(60px,8vw,110px);background:var(--cream);overflow:hidden}
+.story-inner{position:relative;z-index:2;width:min(860px,100%);margin:0 auto;text-align:center}
+.story-inner h1{font:italic 500 clamp(44px,8vw,84px)/1 Georgia,serif;color:var(--gold);margin:14px 0 6px}
+.story-anchor{color:var(--gold);font-size:26px;margin-bottom:14px}
+.story-date{display:inline-block;background:var(--pink);color:#fff;font:700 15px/1 Georgia,serif;letter-spacing:.06em;padding:9px 22px;border-radius:999px;margin:10px 0 22px;box-shadow:0 6px 16px rgba(216,27,96,.3)}
+.chat-card{position:relative;border:1px solid rgba(201,147,47,.55);border-radius:26px;padding:clamp(18px,3.4vw,40px);display:grid;gap:18px;background:rgba(255,252,246,.6)}
+.chat-row{display:flex;align-items:flex-end;gap:12px}
+.chat-row.from-julia{flex-direction:row-reverse}
+.chat-avatar{width:clamp(52px,7vw,74px);height:clamp(52px,7vw,74px);border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 5px 14px rgba(82,35,20,.22);flex:none}
+.chat-bubble{position:relative;max-width:72%;text-align:left;padding:14px 18px 8px;border-radius:20px;font:400 clamp(15px,1.8vw,19px)/1.4 Georgia,serif;color:#fff;box-shadow:0 6px 16px rgba(82,35,20,.14)}
+.from-wesley .chat-bubble{background:var(--olive);border-bottom-left-radius:6px}
+.from-julia .chat-bubble{background:var(--pink);border-bottom-right-radius:6px}
+.chat-bubble .ru{font-size:clamp(17px,2vw,21px)}
+.chat-bubble .stamp{display:block;text-align:right;font:400 11px Arial,sans-serif;opacity:.85;margin-top:6px}
+.chat-bubble .stamp .ticks{color:#9adcff;letter-spacing:-2px}
+.chat-bubble.emoji-only{font-size:30px;padding:12px 16px 6px}
+.chat-react{position:absolute;left:14px;bottom:-14px;background:#3c451f;border-radius:50%;width:30px;height:30px;display:grid;place-items:center;font-size:15px;border:2px solid var(--cream)}
+.story-copy{margin:26px auto 0;max-width:640px;font:400 clamp(16px,1.9vw,19px)/1.55 Georgia,serif;color:#3d362d}
+.story-heart-divider{display:flex;align-items:center;gap:12px;justify-content:center;color:var(--pink);margin:26px 0 8px}
+.story-heart-divider::before,.story-heart-divider::after{content:"";height:1px;width:min(180px,26vw);background:linear-gradient(90deg,transparent,var(--pink))}
+.story-heart-divider::after{background:linear-gradient(90deg,var(--pink),transparent)}
+.story-inner h2{font:600 clamp(28px,4.6vw,46px)/1.1 Georgia,serif;color:var(--gold);margin:12px 0 8px}
+
+/* ---- Travel hero ---- */
+
+/* ---- Pickleball overlays ---- */
+.pb-form{position:absolute;z-index:10;left:2.9%;top:50.35%;width:45.9%;height:21%;background:#fffdf7;border:1px solid rgba(216,27,96,.25);border-radius:14px;padding:1.4% 1.6%;display:flex;flex-direction:column;gap:2.5%;box-shadow:0 6px 20px rgba(82,35,20,.10);overflow:auto}
+.pb-form h2{margin:0;text-align:center;font:800 clamp(11px,1.55vw,20px)/1 Arial,sans-serif;letter-spacing:.05em;color:var(--pink)}
+.pb-form .pb-sub{margin:0;text-align:center;font:italic 400 clamp(9px,1.1vw,14px) Georgia,serif;color:#7c6b53}
+.pb-form label{font:700 clamp(8px,.95vw,12px)/1.1 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6c5c45}
+.pb-form input{display:block;width:100%;margin-top:2px;padding:.55em .7em;border:1px solid #e3cba9;border-radius:8px;font:inherit;font-size:clamp(10px,1.2vw,15px);background:#fff}
+.pb-form button{border:0;border-radius:999px;padding:.65em 1em;background:var(--pink);color:#fff;font:800 clamp(10px,1.25vw,15px) Arial,sans-serif;letter-spacing:.05em;cursor:pointer}
+.pb-form button:hover{background:#c01455}
+.pb-form .pb-status{margin:0;text-align:center;font:italic 400 clamp(9px,1.05vw,13px) Georgia,serif;color:var(--olive);min-height:1.2em}
+
+/* ---- RSVP v2 (matches approved mock) ---- */
+.rsvp2-body{background:var(--cream);color:var(--ink);font-family:Georgia,serif}
+.rsvp2-shell{position:relative;max-width:1100px;margin:0 auto;padding:clamp(18px,3.5vw,48px) 14px 70px}
+.rsvp2-head{text-align:center;position:relative;z-index:2}
+.rsvp2-head .rsvp-anchor{color:var(--gold);font-size:30px}
+.rsvp2-head h1{font:600 clamp(40px,6.8vw,72px)/1.05 Georgia,serif;color:var(--gold);margin:8px auto 10px;max-width:560px}
+.rsvp2-divider{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--pink);margin:6px 0 12px}
+.rsvp2-divider::before,.rsvp2-divider::after{content:"";height:1px;width:min(120px,18vw);background:#c9932f66}
+.rsvp2-deadline{font-size:clamp(16px,1.9vw,19px)}
+.rsvp2-deadline strong{color:var(--pink)}
+.rsvp2-script{font:italic 500 clamp(19px,2.4vw,24px) Georgia,serif;color:var(--gold);margin:6px 0 26px}
+.rsvp2-bar{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fffdf7;border:1px solid #e6d3b3;border-radius:14px;padding:14px 18px;margin:0 auto 26px;max-width:760px;font-weight:700;font-family:Arial,sans-serif;font-size:15px}
+.rsvp2-bar select{font:inherit;padding:8px 12px;border:1px solid #d5bda0;border-radius:10px;background:#fff;min-width:88px}
+.guest-card{position:relative;z-index:2;background:#fffdf7;border:1px solid #e6d3b3;border-radius:18px;padding:0 0 20px;margin:0 auto 26px;max-width:760px;overflow:hidden}
+.guest-tag{display:inline-block;background:var(--pink);color:#fff;font:800 12px/1 Arial,sans-serif;letter-spacing:.1em;padding:9px 16px;border-radius:0 0 12px 0}
+.guest-names{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 22px 4px}
+.guest-names label{font:700 11px/1 Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#6c5c45}
+.guest-names input{display:block;width:100%;margin-top:5px;padding:11px 12px;border:1px solid #d5bda0;border-radius:10px;font:400 16px Georgia,serif;background:#fff}
+.guest-events-title{margin:14px 22px 4px;font:800 12px/1 Arial,sans-serif;letter-spacing:.12em;color:var(--pink);border-bottom:1px solid #eadbbd;padding-bottom:10px}
+.event-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px 22px 0}
+.event-cell{text-align:center}
+.event-cell .ev-name{font:700 13px/1.2 Georgia,serif;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:6px}
+.event-cell .ev-ico{font-size:15px}
+.ev-btn{display:block;width:100%;margin-top:6px;border:1px solid #d9c39d;border-radius:999px;background:#fff;color:#6c5c45;font:700 12px/1 Arial,sans-serif;padding:9px 4px;cursor:pointer}
+.ev-btn.yes.on{background:var(--pink);border-color:var(--pink);color:#fff;box-shadow:0 4px 12px rgba(216,27,96,.3)}
+.ev-btn.no.on{background:#6c5c45;border-color:#6c5c45;color:#fff}
+.bingo-clue{margin:18px 22px 0;background:#fff;border:1px solid #e6d3b3;border-radius:12px;padding:14px 16px}
+.bingo-clue h3{margin:0 0 4px;font:800 12px/1 Arial,sans-serif;letter-spacing:.1em;color:var(--pink)}
+.bingo-clue p{margin:0 0 8px;font-size:14px;color:#6c5c45}
+.bingo-clue textarea,.rsvp2-note textarea{width:100%;border:1px solid #d5bda0;border-radius:10px;padding:11px 12px;font:400 15px Georgia,serif;background:#fffdf7;resize:vertical}
+.rsvp2-note{position:relative;z-index:2;background:#fffdf7;border:1px solid #e6d3b3;border-radius:14px;padding:16px 20px;margin:0 auto 30px;max-width:760px}
+.rsvp2-note label{display:block;font:700 14px Arial,sans-serif;margin-bottom:10px}
+.rsvp2-submit{position:relative;z-index:2;display:flex;justify-content:center;margin:4px 0 42px}
+.rsvp2-submit button{display:inline-flex;align-items:center;gap:10px;border:0;border-radius:999px;background:linear-gradient(120deg,#b1114b,var(--pink));color:#fff;font:700 16px Georgia,serif;letter-spacing:.12em;text-transform:uppercase;padding:16px 38px;cursor:pointer;box-shadow:0 12px 28px rgba(216,27,96,.35)}
+.rsvp2-submit button:hover{filter:brightness(1.06)}
+.rsvp2-status{position:relative;z-index:2;text-align:center;font:italic 500 17px Georgia,serif;color:var(--olive);min-height:1.4em;margin:-26px 0 26px}
+.gift-frame{position:relative;z-index:2;text-align:center;border:1px solid #c9932f88;border-radius:6px;max-width:820px;margin:0 auto;padding:26px 26px 22px}
+.gift-frame .gift-fl{color:var(--pink)}
+.gift-frame h2{font:italic 500 clamp(24px,3.4vw,34px) Georgia,serif;color:var(--gold);margin:4px 0 10px}
+.gift-frame p{margin:0 auto;max-width:640px;line-height:1.6;font-size:15.5px}
+.gift-frame .zelle{color:var(--pink);font-weight:700}
+.rsvp2-footer-anchor{position:relative;z-index:2;text-align:center;color:var(--gold);font-size:24px;margin-top:34px;letter-spacing:14px}
+@media(max-width:700px){.event-grid{grid-template-columns:repeat(2,1fr)}.guest-names{grid-template-columns:1fr}.rsvp2-bar{flex-direction:column;align-items:flex-start}}
+
+/* ============================================================
+   v23 — welcome gate rebuilt to match approved mock
+   ============================================================ */
+.gate3{position:fixed;inset:0;z-index:200;overflow:auto;display:grid;place-items:center;padding:26px 14px;background:rgba(24,15,20,.55)}
+.gate3[hidden]{display:none}
+.gate3-card{position:relative;width:min(1060px,97vw);background:#faf1e4;border:2px solid #cda13e;border-radius:20px;box-shadow:0 30px 90px rgba(0,0,0,.45);overflow:hidden}
+.gate3-card::before{content:"";position:absolute;inset:7px;border:1px solid #cda13e99;border-radius:14px;pointer-events:none;z-index:4}
+.g3fl{position:absolute;z-index:1;pointer-events:none}
+.g3fl-tl{top:-6px;left:-6px;width:clamp(90px,15%,175px)}
+.g3fl-tr{top:-6px;right:-6px;width:clamp(110px,19%,225px)}
+.g3fl-bl{bottom:-6px;left:-6px;width:clamp(100px,17%,200px)}
+.g3fl-br{bottom:-6px;right:-6px;width:clamp(105px,18%,215px)}
+.g3-photo{position:absolute;z-index:2;pointer-events:none;filter:drop-shadow(0 10px 24px rgba(60,25,20,.28))}
+.g3-wes{left:.5%;top:24%;width:24%}
+.g3-jul{right:.5%;top:30%;width:23%}
+.gate3-content{position:relative;z-index:3;max-width:640px;margin:0 auto;padding:clamp(26px,4vw,44px) 18px clamp(24px,3.4vw,38px);text-align:center;color:#233047}
+.g3-ornament{color:#b98a2c;font-size:22px;letter-spacing:8px}
+.g3-ornament .anch{font-size:26px}
+.gate3-content h1{margin:10px 0 2px;font:700 clamp(24px,3.6vw,38px)/1.15 "Playfair Display",Georgia,serif;color:#1e2f4d}
+.gate3-content h1 .script{display:block;font:400 clamp(38px,6vw,60px)/1.1 "Great Vibes",cursive;color:#c2185b;margin-top:2px}
+.g3-div{display:flex;align-items:center;justify-content:center;gap:10px;color:#c2185b;margin:8px 0}
+.g3-div::before,.g3-div::after{content:"";height:1px;width:min(90px,14vw);background:#cda13e88}
+.g3-copy{max-width:460px;margin:4px auto 2px;font:400 clamp(15px,1.7vw,17.5px)/1.55 Arial,sans-serif;color:#2c3a52}
+.g3-invited{font:600 clamp(24px,3.2vw,34px)/1.2 "Playfair Display",Georgia,serif;color:#8a6a1f;margin:8px 0 0}
+.g3-heart{color:#e0355f;font-size:20px;margin:4px 0 8px}
+.g3-fields{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,4vw,60px);max-width:560px;margin:6px auto 18px;text-align:left}
+.g3-field{position:relative;padding-top:64px}
+.g3-bubble{position:absolute;top:0;background:#fdf6ec;border:1px solid #dfa4b4;border-radius:16px;padding:8px 14px;font:400 clamp(15px,1.7vw,18px)/1.25 "Great Vibes",cursive;font-size:clamp(17px,1.9vw,21px);color:#8f2747;box-shadow:0 4px 12px rgba(120,40,60,.12);white-space:nowrap}
+.g3-bubble::after{content:"↷";position:absolute;bottom:-24px;font-size:20px;color:#c2185b;transform:rotate(64deg)}
+.g3-bubble-l{left:0}.g3-bubble-l::after{left:16px}
+.g3-bubble-r{right:0}.g3-bubble-r::after{right:22px;transform:rotate(118deg) scaleX(-1)}
+.g3-field label{display:block;font:700 12px/1 Arial,sans-serif;letter-spacing:.12em;color:#1e2f4d;margin-bottom:7px}
+.g3-field label .fl{color:#c9932f}
+.g3-field input{display:block;width:100%;padding:13px 15px;border:1.5px solid #b7546e;border-radius:12px;background:#fffaf2;font:400 16px Arial,sans-serif;color:#233047}
+.g3-field input::placeholder{color:#9a8a76}
+.g3-field input:focus{outline:2px solid #c2185b55;border-color:#c2185b}
+.g3-btn{display:inline-flex;align-items:center;gap:10px;border:2px solid #e2bc5e;border-radius:999px;padding:15px 44px;background:linear-gradient(180deg,#c01455,#8f0d3f);color:#fff;font:800 clamp(15px,1.8vw,19px)/1 Arial,sans-serif;letter-spacing:.1em;cursor:pointer;box-shadow:0 12px 26px rgba(143,13,63,.4)}
+.g3-btn:hover{filter:brightness(1.08)}
+.g3-btn .anch{color:#f2d98a}
+.gate3 .welcome-error{color:#a61b42;min-height:1.3em;margin:10px 0 0;font:600 14px Arial,sans-serif}
+.g3-footer{max-width:560px;margin:14px auto 0;border:1.5px dashed #d81b60;border-radius:12px;padding:10px 16px;font:400 clamp(22px,2.6vw,28px)/1.2 "Great Vibes",cursive;color:#c2185b}
+.g3-footer .gh{color:#c9932f;margin-right:10px}
+@media(max-width:900px){.g3-wes{width:21%;top:30%}.g3-jul{width:20%;top:35%}.gate3-content{max-width:560px}}
+@media(max-width:680px){.g3-photo{display:none}.g3-fields{grid-template-columns:1fr;gap:14px}.g3-field{padding-top:56px}.g3-bubble{white-space:normal}}
+
+/* serif/script fonts for rebuilt pages when Google Fonts are available */
+.story-inner h1{font-family:"Great Vibes",Georgia,cursive;font-style:normal;font-weight:400}
+.story-inner h2,.rsvp2-head h1{font-family:"Playfair Display",Georgia,serif}
+.rsvp2-script,.gift-frame h2{font-family:"Great Vibes",Georgia,cursive;font-style:normal}
+
+/* ============================================================
+   v24 — Our Story rebuilt to mock proportions; shared logo
+   ============================================================ */
+/* consistent Harrison Set Sail logo in real navs */
+
+/* linen background + compact story layout */
+.story-page{background:#f8f0de;padding:clamp(14px,2.5vw,30px) 16px clamp(40px,5vw,70px)}
+.story-inner{width:min(700px,100%)}
+.story-inner h1{font-size:clamp(44px,6vw,68px);margin:6px 0 0;color:#b98a2c}
+.story-anchor{font-size:20px;margin:2px 0 6px}
+.story-date{font-size:14px;padding:8px 20px;margin:4px 0 16px}
+.chat-card{border-radius:22px;padding:clamp(16px,2.6vw,30px) clamp(14px,2.4vw,28px);display:block;background:#fbf4e4cc}
+/* overlap-proof chat rows: avatar is absolutely positioned in reserved padding */
+.chat-row{position:relative;display:block;margin:0 0 16px;min-height:62px}
+.chat-row:last-child{margin-bottom:2px}
+.chat-row.from-wesley{padding-left:78px;text-align:left}
+.chat-row.from-julia{padding-right:78px;text-align:right}
+.chat-avatar{position:absolute;bottom:2px;width:62px;height:62px;border-width:3px}
+.chat-row.from-wesley .chat-avatar{left:0}
+.chat-row.from-julia .chat-avatar{right:0}
+.chat-bubble{display:inline-block;max-width:min(400px,92%);font-size:clamp(15px,1.6vw,17.5px);padding:12px 16px 7px;vertical-align:bottom}
+.chat-bubble .ru{font-size:clamp(16px,1.7vw,19px)}
+.chat-bubble.emoji-only{font-size:26px;padding:10px 14px 5px}
+.chat-react{width:28px;height:28px;font-size:14px;bottom:-12px;border-color:#f8f0de}
+.story-copy{margin:20px auto 0;max-width:560px;font-size:clamp(15px,1.6vw,17px);line-height:1.5}
+.story-heart-divider{margin:18px 0 4px}
+.story-inner h2{font-size:clamp(26px,3.6vw,38px);margin:8px 0 6px}
+.corner-florals.story-page .fl-tl{width:clamp(90px,13vw,170px)}
+.corner-florals.story-page .fl-tr{width:clamp(100px,15vw,195px)}
+.corner-florals.story-page .fl-bl{width:clamp(95px,14vw,180px)}
+.corner-florals.story-page .fl-br{width:clamp(100px,15vw,190px)}
+
+/* ============================================================
+   v25 — travel hero image + swapped FAQ row
+   ============================================================ */
+.faq-row-overlay{position:absolute;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:6px;background:#fdfaf2;border:1px solid #e3d6be;border-radius:8px;padding:0 1.1%;cursor:pointer;text-align:left;box-shadow:0 1px 3px rgba(80,60,30,.06)}
+.faq-row-overlay:hover{background:#fff}
+.faq-answer p{white-space:pre-line}
+
+/* ============================================================
+   v26 — RSVP linen background, fine print, gift frame lines
+   ============================================================ */
+.rsvp2-body{background:#f8f0de}
+.rsvp2-shell{background:#f8f0de}
+.rsvp2-fineprint{position:relative;z-index:2;text-align:center;font:italic 400 13px/1.5 Georgia,serif;color:#7c6b53;max-width:560px;margin:-30px auto 34px}
+.gift-frame{text-align:center}
+.gift-frame p{margin:0 auto 4px;max-width:640px;line-height:1.55;font-size:15.5px}
+.gift-frame .zelle-line{margin:2px auto 6px}
+.gift-frame .zelle{font-size:16.5px}
+
+/* ============================================================
+   v28 — shared adventure-style header; tighter Our Story
+   ============================================================ */
+.site-nav{position:relative;z-index:40;display:flex;align-items:center;gap:18px;background:#fbf4e6;padding:8px 22px;box-shadow:0 2px 10px rgba(90,60,30,.10)}
+.site-nav .sn-logo{display:flex;flex-direction:column;align-items:center;line-height:1;text-decoration:none}
+.site-nav .sn-logo .word{font:700 14px/1 "Playfair Display",Georgia,serif;letter-spacing:.3em;color:#b98a2c}
+.site-nav .sn-logo .script{font:400 23px/1 "Great Vibes",cursive;color:var(--pink);margin-top:1px}
+.site-nav .sn-logo .anch{font-size:11px;color:#b98a2c;margin-top:1px}
+.sn-links{display:flex;gap:clamp(14px,2.6vw,34px);margin:0 auto;flex-wrap:wrap;justify-content:center}
+.sn-links a{font:600 12.5px/1 "Playfair Display",Georgia,serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#5d4a2e;padding:6px 0}
+.sn-links a:hover{color:var(--pink)}
+.sn-links a[aria-current]{color:var(--pink);border-bottom:2px solid var(--pink)}
+.sn-badge{flex:none;width:40px;height:40px;border-radius:50%;background:var(--pink);color:#fff;display:grid;place-items:center;font-size:17px;text-decoration:none;border:2px solid #fff;box-shadow:0 3px 10px rgba(216,27,96,.35)}
+@media(max-width:760px){.site-nav{flex-wrap:wrap;justify-content:center;padding:8px 10px}.sn-badge{display:none}.sn-links a{font-size:11px}}
+
+/* linen tone site-wide on rebuilt pages */
+.rsvp2-body,.rsvp2-shell,.story-page{background:#f7efdc}
+
+/* tighter Our Story rhythm (mock density) */
+.story-page{padding:clamp(8px,1.6vw,20px) 16px clamp(28px,3.6vw,52px)}
+.story-inner{width:min(660px,100%)}
+.story-inner h1{font-size:clamp(40px,5.2vw,58px);margin:2px 0 0}
+.story-anchor{font-size:17px;margin:0 0 4px}
+.story-date{font-size:13px;padding:7px 18px;margin:0 0 12px}
+.chat-card{padding:clamp(12px,2vw,22px) clamp(12px,2vw,22px)}
+.chat-row{margin:0 0 11px;min-height:56px}
+.chat-row.from-wesley{padding-left:70px}
+.chat-row.from-julia{padding-right:70px}
+.chat-avatar{width:56px;height:56px}
+.chat-bubble{max-width:min(380px,92%);font-size:clamp(14px,1.4vw,16.5px);padding:10px 14px 6px}
+.chat-bubble .ru{font-size:clamp(15px,1.5vw,18px)}
+.chat-bubble .stamp{margin-top:4px;font-size:10.5px}
+.chat-bubble.emoji-only{font-size:23px;padding:8px 12px 4px}
+.story-copy{margin:14px auto 0;max-width:540px;font-size:clamp(14px,1.5vw,16px);line-height:1.45}
+.story-heart-divider{margin:12px 0 2px}
+.story-inner h2{font-size:clamp(24px,3vw,33px);margin:6px 0 4px}
+
+/* ============================================================
+   v30 FIX — the corner-floral WRAPPER must stay clickable;
+   only the floral images themselves ignore the mouse.
+   (This was silently blocking every click on the RSVP page.)
+   ============================================================ */
+.corner-florals{pointer-events:auto}
+.corner-florals>img{pointer-events:none}
+
+/* ============================================================
+   v31 — batch: RSVP 3-event grid, gate mobile photos, story
+   translation, adventure script overlay, pickleball solo,
+   explore mobile, travel rebuild
+   ============================================================ */
+
+/* RSVP: pickleball removed from grid */
+.event-grid{max-width:560px;margin:0 auto}
+@media(min-width:701px){.event-grid{grid-template-columns:repeat(3,1fr)}}
+.rsvp2-pb-note{position:relative;z-index:2;text-align:center;font:italic 500 15px Georgia,serif;color:#6c5c45;margin:-8px auto 24px}
+.rsvp2-pb-note a{color:var(--pink);font-weight:700}
+
+/* Our Story: english translation line in bubble */
+.chat-bubble .translation{display:block;font:italic 400 .88em Georgia,serif;opacity:.92;margin-top:2px}
+
+/* Gate: photos visible on mobile */
+.g3-photos{display:contents}
+@media(max-width:680px){
+  .g3-photos{display:flex;justify-content:center;gap:26px;margin:2px 0 10px}
+  .g3-photo{display:block;position:static;width:108px;height:108px;object-fit:cover;object-position:top;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 16px rgba(60,25,20,.25)}
+}
+
+/* Adventure: script line overlay (replaces damaged baked text) */
+
+/* Pickleball: solo mode */
+#pb-p2-label[hidden]{display:none}
+button.hotspot{background:none;border:0;padding:0;cursor:pointer}
+
+/* Explore: mobile usability */
+.ship-interactive{touch-action:pan-y pinch-zoom}
+@media(max-width:760px){
+  .neighborhood-panel{grid-template-columns:1fr;grid-template-rows:auto auto auto auto;height:auto;min-height:34.5%;position:absolute;overflow:auto}
+  .neighborhood-copy{padding:3.2vw 3.6vw 1.5vw}
+  .neighborhood-copy .eyebrow{font-size:2.6vw;letter-spacing:.14em}
+  .neighborhood-copy h2{font-size:5.6vw;margin:1vw 0 1.6vw;line-height:1.05}
+  .neighborhood-copy p{font-size:3.1vw;line-height:1.45}
+  #n-image{width:100%;height:26vw;object-fit:cover}
+  .venue-heading{font-size:3.4vw;padding:1.6vw}
+  .venue-cards{grid-template-columns:1fr 1fr;gap:1.8vw;padding:2vw 2.6vw 3vw}
+  .venue-cards article{padding:2.4vw}
+  .venue-cards span{font-size:2.2vw;padding:.7vw 1.6vw}
+  .venue-cards h3{font-size:3.4vw;margin:1.4vw 0 .8vw}
+  .venue-cards p{font-size:2.7vw}
+}
+
+/* ---- Travel rebuild ---- */
+.tv-body{background:#0b2f47;color:var(--ink)}
+.tv-wrap{max-width:1240px;margin:0 auto;padding:22px 14px 46px;background:
+ linear-gradient(180deg,#0b2f47,#0a2a40)}
+.tv-row{display:grid;gap:18px;margin-bottom:18px}
+.tv-row-steps{grid-template-columns:30% 1fr}
+.tv-row-steps .tv-step3{grid-column:1/-1}
+.tv-row-info{grid-template-columns:1fr 1.15fr 1fr}
+.tv-card{background:#fdf8ee;border-radius:16px;padding:22px 22px 24px;box-shadow:0 8px 22px rgba(0,0,0,.22)}
+.tv-step-label{font:700 12px/1 Arial,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#b98a2c;text-align:center;margin:0 0 8px}
+.tv-card h2{font:600 clamp(20px,2vw,26px)/1.2 "Playfair Display",Georgia,serif;text-align:center;margin:0 0 10px;color:#233047}
+.tv-h-pink{color:var(--pink)!important;font-size:clamp(17px,1.6vw,20px)!important;text-align:left!important}
+.tv-h-olive{color:var(--olive)!important;font-size:clamp(17px,1.6vw,20px)!important}
+.tv-h-gold{color:#b98a2c!important;font-size:clamp(15px,1.4vw,18px)!important}
+.tv-h-second{margin-top:16px!important}
+.tv-intro{text-align:center;margin:0 0 14px;font-size:15px;color:#4c4235}
+.tv-card p{line-height:1.55;font-size:14.5px}
+.tv-aj-logo{display:block;width:min(200px,80%);margin:6px auto 16px}
+.tv-btn{display:block;text-align:center;margin:10px auto 0;max-width:240px;border:1.6px solid var(--pink);border-radius:999px;padding:11px 18px;color:var(--pink);font:700 14px Arial,sans-serif;text-decoration:none}
+.tv-btn:hover{background:#d81b6012}
+.tv-btn-solid{background:linear-gradient(120deg,#b1114b,var(--pink));color:#fff;border:0;box-shadow:0 8px 20px rgba(216,27,96,.35)}
+.tv-btn-solid:hover{filter:brightness(1.07);background:linear-gradient(120deg,#b1114b,var(--pink))}
+.tv-btn-big{max-width:300px;padding:15px 24px;font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+.tv-rooms{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.tv-rooms article{background:#fff;border:1px solid #ead9bd;border-radius:12px;overflow:hidden;text-align:center;padding-bottom:12px}
+.tv-rooms img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+.tv-rooms h3{font:600 17px/1 "Playfair Display",Georgia,serif;margin:10px 6px 6px}
+.tv-rooms p{font-size:12.5px;line-height:1.45;margin:0 10px 6px}
+.tv-price{color:#4c4235}
+.tv-price strong{display:block;font:700 22px/1.1 Georgia,serif;color:var(--pink)}
+.tv-foot{text-align:center;font-size:12.5px;color:#6c5c45;margin:14px 0 0}
+.tv-timeline{list-style:none;margin:0;padding:0}
+.tv-timeline li{padding:8px 0 8px 26px;position:relative;font-size:14px;line-height:1.5;border-bottom:1px dashed #e3d2b4}
+.tv-timeline li:last-child{border-bottom:0}
+.tv-timeline li::before{content:"⚓";position:absolute;left:0;top:9px;color:var(--pink);font-size:13px}
+.tv-caution{margin-top:12px;padding:10px 12px;background:#fdeef4;border:1px solid #f1b8cd;border-radius:10px;font:italic 500 13.5px/1.5 Georgia,serif;color:#8f2747}
+.tv-cta{text-align:center;background:transparent;color:#f3ead9;padding:14px 10px 0}
+.tv-cta h2{font:600 clamp(20px,2.2vw,27px)/1.2 "Playfair Display",Georgia,serif;color:#f0d98f;margin:0 0 8px}
+.tv-cta p{max-width:480px;margin:0 auto 6px;line-height:1.5}
+.tv-cta .tv-btn-big{margin-top:14px}
+.tv-script{font:400 clamp(22px,2.6vw,30px)/1.2 "Great Vibes",cursive;color:#f2b8cf;margin-top:16px}
+@media(max-width:900px){
+  .tv-row-steps,.tv-row-info{grid-template-columns:1fr}
+  .tv-rooms{grid-template-columns:1fr 1fr}
+}
+
+/* ============================================================
+   v32 — gate photo anchoring, RSVP join header, explore mobile
+   flow, bingo faq
+   ============================================================ */
+/* Gate: photos flank the content column (anchored outside it) */
+.g3-photos{display:contents}
+.g3-photo{position:absolute;z-index:2;pointer-events:none;filter:drop-shadow(0 10px 24px rgba(60,25,20,.28))}
+.g3-wes{left:auto;right:calc(100% + 14px);top:30%;width:clamp(140px,17vw,230px)}
+.g3-jul{left:calc(100% + 14px);right:auto;top:36%;width:clamp(135px,16vw,220px)}
+.gate3-content{position:relative}
+@media(max-width:1120px){.g3-wes,.g3-jul{width:120px}}
+@media(max-width:980px){.g3-photo{display:none}}
+@media(max-width:680px){
+  .g3-photos{display:flex;justify-content:center;gap:24px;margin:4px 0 12px}
+  .g3-photo{display:block;position:static;width:104px;height:104px;object-fit:cover;object-position:top;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 16px rgba(60,25,20,.25)}
+}
+
+/* RSVP intro */
+.rsvp2-join{font:600 clamp(22px,3vw,30px)/1.2 "Playfair Display",Georgia,serif;color:var(--pink);margin:2px 0 8px}
+.rsvp2-deadline{max-width:640px;margin:0 auto 10px;line-height:1.55;font-size:clamp(14.5px,1.6vw,16.5px)}
+
+/* Explore mobile: panel flows below the artwork */
+@media(max-width:760px){
+  .explore-shell{overflow-x:hidden}
+  .neighborhood-panel{position:static;display:block;width:auto;height:auto;margin:10px 8px 26px;border:1px solid #e2ccb1}
+  .neighborhood-copy{padding:16px 16px 8px}
+  .neighborhood-copy .eyebrow{font-size:11px;letter-spacing:.16em}
+  .neighborhood-copy h2{font-size:26px;margin:6px 0 8px;line-height:1.1;overflow-wrap:normal;hyphens:none}
+  .neighborhood-copy p{font-size:14.5px;line-height:1.5}
+  #n-image{width:100%;height:150px;object-fit:cover;display:block}
+  .venue-heading{font-size:15px;padding:10px;border-top:1px solid #e2ccb1}
+  .venue-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 12px 14px}
+  .venue-cards article{padding:10px}
+  .venue-cards span{font-size:9px;padding:3px 7px}
+  .venue-cards h3{font-size:15px;margin:7px 0 4px}
+  .venue-cards p{font-size:12px;line-height:1.4}
+}
+
+/* ============================================================
+   v33 — gate scroll fix, travel pictograms, explore wrapper
+   ============================================================ */
+/* Gate: block flow so the card top is always reachable */
+.gate3{display:block;padding:26px 14px}
+.gate3-card{margin:0 auto}
+
+/* Travel included/not-included pictogram grid */
+.tv-icons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:6px 0 2px}
+.tv-icons div{background:#fffdf7;border:1px solid #e8dcC3;border-radius:10px;padding:10px 6px;text-align:center;font:600 11.5px/1.3 Arial,sans-serif;color:#3d4a2e}
+.tv-icons div span{display:block;font-size:21px;margin-bottom:5px}
+.tv-icons-out{grid-template-columns:repeat(5,1fr)}
+.tv-icons-out div{color:#7a5c1f}
+.tv-icons-full{background:#fffdf7;border:1px solid #e8dcc3;border-radius:10px;padding:8px;text-align:center;font:600 12px Arial,sans-serif;color:#3d4a2e;margin-top:8px}
+.tv-icons-full span{margin-right:8px;font-size:18px}
+@media(max-width:900px){.tv-icons{grid-template-columns:repeat(4,1fr)}.tv-icons-out{grid-template-columns:repeat(3,1fr)}}
+
+/* Explore: overlays anchored to the artwork only */
+.art-wrap{position:relative}
+.explore-shell{position:relative}
+/* v47 — removed display:none: it hid the live panel on mobile, leaving the
+   Central Park panel that is painted into the artwork PNG (never updates). */
+
+/* ============================================================
+   v34 — uniform nav, mobile floral clearance, full-bleed RSVP,
+   opaque gate, travel note, phantom-tile fix
+   ============================================================ */
+/* gate: opaque backdrop, nothing visible behind, no bypass */
+.gate3{background:rgba(24,15,20,.93);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+
+/* RSVP full-bleed like Our Story */
+.rsvp2-shell{max-width:1600px}
+
+/* mobile: florals shrink and never sit under text */
+@media(max-width:760px){
+  .corner-florals .fl-tl,.corner-florals .fl-tr{width:88px}
+  .corner-florals .fl-bl,.corner-florals .fl-br{width:96px}
+  .rsvp2-head h1{max-width:70vw;margin-left:auto;margin-right:auto}
+  .gift-frame{padding:20px 12px 60px;max-width:calc(100% - 16px)}
+  .gift-frame p{max-width:78vw;margin-left:auto;margin-right:auto}
+  .g3fl-tl,.g3fl-tr{width:74px}
+  .g3fl-bl,.g3fl-br{width:84px}
+  .g3-footer{max-width:calc(100% - 90px);font-size:19px}
+  .story-inner{width:calc(100% - 8px)}
+  .story-inner h2,.story-copy{position:relative;z-index:3}
+}
+.gift-note{margin-top:10px!important;font-style:italic;color:#6c5c45}
+.tv-rsvp-note{background:#fdf8ee;border-radius:12px;padding:12px 16px;text-align:center;font:600 14.5px/1.4 Arial,sans-serif;color:#2f2a24;margin:0 0 16px;box-shadow:0 6px 16px rgba(0,0,0,.2)}
+.tv-rsvp-note a{color:var(--pink)}
+/* v48 — scoped to desktop: unscoped, this overrode the max-900px stacking
+   rule (it came later in the file), pushing Payment Timeline off-screen on phones */
+@media(min-width:901px){.tv-row-info{grid-template-columns:1.25fr 1fr}}
+/* explore: cover baked panel fully (kills phantom slivers) */
+.neighborhood-panel{height:37.5%}
+
+/* ============================================================
+   v36 — FAQ page, wedding-day note
+   ============================================================ */
+.faq-body{background:#f7efdc}
+.faq-wrap{position:relative;max-width:1600px;margin:0 auto;padding:clamp(14px,2.5vw,32px) 14px 60px;overflow:hidden}
+.faq-hero{position:relative;z-index:2;max-width:860px;margin:0 auto 22px;border-radius:20px;overflow:hidden;border:2px solid #cda13e;box-shadow:0 14px 40px rgba(80,40,30,.25)}
+.faq-hero img{display:block;width:100%;height:clamp(220px,34vw,380px);object-fit:cover;object-position:50% 22%}
+.faq-cats{position:relative;z-index:2;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:900px;margin:0 auto 26px}
+.fc{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;border-radius:16px;padding:18px 8px;font:700 14px/1.25 "Playfair Display",Georgia,serif;text-align:center;color:#4a3b2a;font-size:26px;box-shadow:0 6px 16px rgba(120,70,40,.12)}
+.fc span{font-size:14px}
+.fc-pink{background:#fbe3ec}.fc-orange{background:#fdeadb}.fc-rose{background:#fbe0dd}.fc-gold{background:#f6ecd2}
+.faq-cols{position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;max-width:1100px;margin:0 auto 30px;align-items:start}
+.faq-cols section{background:#fdf8ee;border:1px solid #e8d8bb;border-radius:16px;padding:16px 14px}
+.fq-h{font:700 17px/1.2 "Playfair Display",Georgia,serif;margin:0 0 10px;text-align:center}
+.fq-pink{color:var(--pink)}.fq-orange{color:#d97a1f}.fq-rose{color:#b3403a}
+.faq-cols details{background:#fffdf7;border:1px solid #e6d5b8;border-radius:12px;padding:0 12px;margin-bottom:8px}
+.faq-cols summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:8px;align-items:center;padding:11px 0;font:600 13.5px/1.35 Arial,sans-serif;color:#2f2a24}
+.faq-cols summary::after{content:"⌄";color:#6b5c45;flex:none;transition:transform .2s}
+.faq-cols details[open] summary::after{transform:rotate(180deg)}
+.faq-cols details p{margin:0 0 11px;font-size:13.5px;line-height:1.5;color:#463d31}
+.faq-cols details a{color:var(--pink);font-weight:700}
+.faq-ask{position:relative;z-index:2;max-width:760px;margin:0 auto;background:#fdf8ee;border:1px dashed #d81b60;border-radius:18px;padding:22px 20px;text-align:center}
+.faq-ask h2{font:600 clamp(20px,2.4vw,26px)/1.2 "Playfair Display",Georgia,serif;color:var(--pink);margin:0 0 4px}
+.faq-ask p{margin:0 0 14px}
+.fa-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.faq-ask input,.faq-ask textarea{width:100%;padding:12px 13px;border:1px solid #d5bda0;border-radius:12px;font:400 15px Georgia,serif;background:#fffdf7}
+.faq-ask button{margin-top:12px;border:0;border-radius:999px;background:linear-gradient(120deg,#b1114b,var(--pink));color:#fff;font:700 15px Georgia,serif;letter-spacing:.1em;text-transform:uppercase;padding:13px 34px;cursor:pointer;box-shadow:0 10px 24px rgba(216,27,96,.35)}
+.fa-status{margin:10px 0 0;font:italic 400 13.5px Georgia,serif;color:#7c6b53}
+.faq-foot{position:relative;z-index:2;text-align:center;margin:30px auto 0;color:#5d4a2e;line-height:1.7}
+.faq-foot .fscript{font:400 22px "Great Vibes",cursive;color:#c2185b}
+@media(max-width:860px){.faq-cols{grid-template-columns:1fr}.faq-cats{grid-template-columns:repeat(2,1fr)}.fa-row{grid-template-columns:1fr}}
+.wd-note{max-width:1600px;margin:0 auto;background:#fbe3ec;text-align:center;padding:14px 18px;font:600 15px/1.5 Arial,sans-serif;color:#8f2747}
+
+/* ============================================================
+   v37 — FAQ additions, wedding-day note aesthetic,
+   explore neighborhood buttons clickable
+   ============================================================ */
+.fq-gold2{color:#a97d1f}
+.pg-note{font:italic 400 14px/1.6 Georgia,serif;color:#5d4a2e;margin:4px 2px}
+.faq-hero img{object-position:50% 0%}
+
+/* wedding-day note: match page theme */
+.wd-note{background:#f8f1e2;padding:20px 18px 26px;text-align:center;font:italic 500 clamp(15px,1.6vw,18px)/1.6 Georgia,serif;color:#b3403a}
+.wd-note::before{content:"— ✿ —";display:block;font-style:normal;color:#c9932f;letter-spacing:6px;margin-bottom:8px;font-size:14px}
+
+/* explore: neighborhood labels must sit above the drag stage */
+.neighborhood{z-index:24 !important}
+.ship-interactive{z-index:5}
+
+/* v40 — five category cards in one row; hero frame keeps height while loading */
+.faq-cats{grid-template-columns:repeat(5,1fr);max-width:1100px}
+@media(max-width:860px){.faq-cats{grid-template-columns:repeat(2,1fr)}}
+.faq-hero{min-height:224px;background:#efe3cc}
+
+/* v41 — FAQ: full-height couple photo first, caption under tiles */
+.faq-hero{max-width:920px;margin:6px auto 26px;min-height:0}
+.faq-hero img{height:auto;object-fit:unset;object-position:unset;aspect-ratio:auto}
+.faq-browse{position:relative;z-index:2;text-align:center;font:italic 500 clamp(16px,1.8vw,20px)/1.5 Georgia,serif;color:#8a6a1f;max-width:640px;margin:0 auto 26px}
+
+/* ============================================================
+   v42 — travel/explore de-navy, venue tile spacing, RSVP
+   decline modal, FAQ hero hardening
+   ============================================================ */
+/* Travel: cream aesthetic instead of navy */
+.tv-body{background:#f7efdc}
+.tv-wrap{background:transparent}
+.tv-card,.tv-faqs,.tv-rsvp-note{box-shadow:0 8px 22px rgba(120,80,40,.14)}
+.tv-cta h2{color:#b98a2c}
+.tv-cta{color:#3d362d}
+.tv-cta p{color:#3d362d}
+.tv-script{color:#c2185b}
+
+/* Explore: panel covers all remaining navy below the ship */
+.neighborhood-panel{left:0;width:100%;top:61.8%;height:38.2%;border-radius:0;border-left:0;border-right:0;border-bottom:0}
+/* venue tiles: no stretched white space */
+.venue-cards{align-items:start;grid-auto-rows:min-content}
+.venue-cards article{height:auto;align-self:start;padding-bottom:14px}
+
+/* RSVP decline popup */
+.rsvp-modal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:rgba(24,15,20,.6);backdrop-filter:blur(6px);padding:20px}
+.rsvp-modal[hidden]{display:none}
+.rsvp-modal-card{position:relative;width:min(560px,94vw);background:#fdf8ee;border:2px solid #cda13e;border-radius:22px;padding:38px 30px 30px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+.rsvp-modal-card p{font:500 clamp(16px,2vw,19px)/1.65 Georgia,serif;color:#4a3b2a;margin:0}
+.rm-heart{font-size:34px;margin-bottom:10px}
+.rsvp-modal-close{position:absolute;top:10px;right:14px;border:0;background:none;font-size:26px;color:#b98a2c;cursor:pointer}
+
+/* FAQ hero: keep placeholder height until image paints */
+.faq-hero{min-height:200px;background:#efe3cc}
+.faq-hero img{height:auto}
+
+
+/* ============================================================
+   v50 — mobile explore: panel lives in normal page flow.
+   The artwork PNG has a Central Park panel painted into its bottom
+   38.2%; the live panel is pulled up over it with a negative margin
+   (0.382 x 1536/1024 = 57.3% of width) so the page scrolls naturally
+   instead of trapping the venue tiles inside an inner scroll region.
+   ============================================================ */
+@media(max-width:760px){
+  .explore-shell .neighborhood-panel{
+    position:relative !important;
+    display:block !important;
+    width:auto;height:auto;min-height:0;max-height:none;
+    left:auto;top:auto;
+    margin:-57.3% 0 0;
+    border:0;border-radius:0;
+    overflow:visible;
+    box-shadow:none;
+    scroll-margin-top:64px;
+    z-index:6;
+  }
+  .explore-shell .neighborhood-copy{padding:18px 16px 6px}
+  .explore-shell .neighborhood-copy .eyebrow{font-size:11px;letter-spacing:.16em}
+  .explore-shell .neighborhood-copy h2{font-size:28px;margin:4px 0 8px;line-height:1.08}
+  .explore-shell .neighborhood-copy p{font-size:14.5px;line-height:1.5;margin:0}
+  #n-image{width:100%;height:170px;object-fit:cover;display:block;margin-top:10px}
+  .explore-shell .venue-heading{font-size:14px;padding:12px 10px 8px;border-top:0}
+  .explore-shell .venue-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:4px 12px 26px}
+  .explore-shell .venue-cards article{padding:11px;min-height:0}
+  .explore-shell .venue-cards h3{font-size:15px;margin:7px 0 4px}
+  .explore-shell .venue-cards p{font-size:12px;line-height:1.4}
+  .explore-shell .venue-cards span{font-size:9px;padding:3px 7px}
+}
+
+/* touch devices: neighborhood labels get a finger-sized target */
+@media(pointer:coarse){
+  .explore-shell .neighborhood{min-height:30px}
+}
+
+/* FAQ hero: always render the full photo, hips to sky (1672x941) */
+.faq-wrap .faq-hero{max-width:920px;min-height:0}
+.faq-wrap .faq-hero img{position:static !important;width:100%;height:auto !important;object-fit:unset !important;object-position:unset !important;aspect-ratio:1672/941}
+
+
+/* ============================================================
+   v51 — Step 3 card, room-lookup link, travel leave-notice modal,
+   RSVP accept modal. All rules below are width-agnostic or scoped.
+   ============================================================ */
+.tv-btn-outline{margin-top:10px}
+.tv-step3 .tv-intro{max-width:720px;margin-left:auto;margin-right:auto}
+.rsvp-modal-card p+p{margin-top:10px}
+.rsvp-modal-card .tv-btn{margin:18px auto 0;max-width:320px}
+.tv-leave-modal .tv-leave-continue{color:#7a5a20;border-color:#cda13e;background:transparent;cursor:pointer;margin-top:10px}
+.tv-leave-modal .tv-leave-continue:hover{background:#cda13e14}
+.tv-leave-modal .rsvp-modal-card{max-height:92vh;overflow:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:600px){
+  .tv-leave-modal .rsvp-modal-card{padding:32px 18px 22px}
+  .rsvp-modal-card p{font-size:15px}
+}

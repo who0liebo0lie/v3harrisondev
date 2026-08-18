@@ -1,0 +1,85 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Julia & Wesley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css?v=51"></head><body>
+
+<section class="gate3" id="welcome-gate" aria-labelledby="welcome-title">
+  <div class="gate3-card">
+    <img class="g3fl g3fl-tl" src="assets/florals/tl.png" alt="">
+    <img class="g3fl g3fl-tr" src="assets/florals/tr.png" alt="">
+    <img class="g3fl g3fl-bl" src="assets/florals/bl.png" alt="">
+    <img class="g3fl g3fl-br" src="assets/florals/br.png" alt="">
+    <div class="gate3-content">
+      <div class="g3-ornament">✿ <span class="anch">⚓</span> ✿</div>
+      <h1 id="welcome-title">Welcome to Julia &amp; Wesley's<span class="script">Wedding Festival</span></h1>
+      <div class="g3-div">✿</div>
+      <p class="g3-copy">We're so excited to share all the details for our wedding adventure. Including answering all your questions along the way.</p>
+      <div class="g3-div">♡</div>
+      <p class="g3-invited">Yes!! You're invited.</p>
+      <div class="g3-heart">♥</div>
+      <div class="g3-photos">
+        <img class="g3-photo g3-wes" src="assets/portraits/wesley-cutout.png" alt="Wesley">
+        <img class="g3-photo g3-jul" src="assets/portraits/julia-cutout.png" alt="Julia">
+      </div>
+      <form id="welcome-form" novalidate>
+        <div class="g3-fields">
+          <div class="g3-field">
+            <div class="g3-bubble g3-bubble-l">First name first?</div>
+            <label for="first-name">FIRST NAME <span class="fl">✿</span></label>
+            <input id="first-name" name="firstName" autocomplete="given-name" placeholder="Enter your first name" required>
+          </div>
+          <div class="g3-field">
+            <div class="g3-bubble g3-bubble-r">And your last name?</div>
+            <label for="last-name">LAST NAME <span class="fl">✿</span></label>
+            <input id="last-name" name="lastName" autocomplete="family-name" placeholder="Enter your last name" required>
+          </div>
+        </div>
+        <button class="g3-btn" type="submit"><span class="anch" aria-hidden="true">⚓</span> THAT'S ME!</button>
+      </form>
+      <p class="welcome-error" id="welcome-error" aria-live="polite"></p>
+      <div class="g3-footer"><span class="gh">♡</span>We're so excited that you're here!</div>
+    </div>
+  </div>
+</section>
+
+<nav class="site-nav" aria-label="Primary navigation">
+  <a class="sn-logo" href="index.html?skip=1"><span class="word">HARRISONS</span><span class="script">Set Sail</span><span class="anch">⚓</span></a>
+  <div class="sn-links"><a href="index.html?skip=1" aria-current="page">Home</a><a href="our-story.html">Our Story</a><a href="adventure.html">The Adventure</a><a href="explore.html">Explore</a><a href="travel.html">Travel</a><a href="faq.html">FAQ</a><a href="rsvp.html">RSVP</a></div>
+  <a class="sn-badge" href="index.html?skip=1" aria-label="Home">⚓</a>
+</nav>
+<main class="page-shell landing-shell"><img class="approved-page" src="assets/approved/landing-page-v2.png" alt="Julia and Wesley wedding invitation landing page">
+</main>
+
+<script src="js/forms.js"></script>
+<script>
+(function () {
+  try {
+    var g = new URLSearchParams(location.search).get('g');
+    if (g && typeof trackWeddingEvent === 'function')
+      trackWeddingEvent({ type: 'open', Event: 'Invitation link opened' });
+  } catch (_) {}
+})();
+</script>
+<script>
+(function () {
+  var gate = document.getElementById('welcome-gate');
+  var err = document.getElementById('welcome-error');
+  function dismiss() { gate.hidden = true; document.body.style.overflow = ''; window.scrollTo(0, 0); }
+  document.body.style.overflow = 'hidden';
+  try { if (new URLSearchParams(location.search).has('skip')) { dismiss(); return; } } catch (_) {}
+  /* v51: returning guests who already told us their name skip the gate */
+  try { if ((localStorage.getItem('weddingGuestName') || '').trim()) { dismiss(); return; } } catch (_) {}
+  document.getElementById('welcome-form').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = document.getElementById('first-name').value.trim();
+    var l = document.getElementById('last-name').value.trim();
+    if (!f || !l) { err.textContent = 'Please enter both your first and last name.'; return; }
+    try { localStorage.setItem('weddingGuestName', f + ' ' + l); } catch (_) {}
+    if (typeof trackWeddingEvent === 'function')
+      trackWeddingEvent({ type: 'open', Event: 'Signed in on welcome screen', Name: f + ' ' + l });
+    dismiss();
+  });
+})();
+</script>
+<noscript><style>.gate3{display:none}</style></noscript>
+</body></html>
